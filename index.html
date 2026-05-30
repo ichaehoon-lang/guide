@@ -198,7 +198,13 @@ input[type=file] { display:none; }
   <div class="ac">
     <h2>🗼 TourFlow 가이드</h2>
     <div class="fld"><label>이메일</label><input type="email" id="login-email" placeholder="guide@example.com"></div>
-    <div class="fld"><label>비밀번호</label><input type="password" id="login-pw" placeholder="••••••••"></div>
+    <div class="fld">
+      <label>비밀번호</label>
+      <div style="position:relative;">
+        <input type="password" id="login-pw" placeholder="••••••••" style="width:100%;padding:12px 44px 12px 12px;border:1px solid #ddd;border-radius:8px;font-size:15px;">
+        <button type="button" onclick="togglePw()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#64748b;" id="pw-eye">👁️</button>
+      </div>
+    </div>
     <button class="btn-login" onclick="App.login()">로그인</button>
     <p class="auth-err" id="auth-err"></p>
   </div>
@@ -427,19 +433,13 @@ var App = {
    ============================== */
 var TourInfo = {
   async load(){
-    var cached=sessionStorage.getItem("tf_tour");
     var data=null, error=null;
-    if(cached){
-      data=JSON.parse(cached);
-    } else {
-      var res=await sb.from("tours")
-        .select("id,tour_code,flight_code,arrival_time,captain_name,captain_contact,bus_capacity,pax,total_days,current_day,scenic_confirmed,everton_confirmed,status,scheduled_start_time,guide_name")
-        .eq("status","pending")
-        .order("scheduled_start_time",{ascending:true})
-        .limit(1).maybeSingle();
-      data=res.data; error=res.error;
-      if(data) sessionStorage.setItem("tf_tour",JSON.stringify(data));
-    }
+    var res=await sb.from("tours")
+      .select("id,tour_code,flight_code,arrival_time,captain_name,captain_contact,bus_capacity,pax,total_days,current_day,scenic_confirmed,everton_confirmed,status,scheduled_start_time,guide_name")
+      .eq("status","pending")
+      .order("scheduled_start_time",{ascending:true})
+      .limit(1).maybeSingle();
+    data=res.data; error=res.error;
 
     var body=el("tour-info-body");
     if(error||!data){
@@ -850,6 +850,12 @@ var ShopDropdown={
     var m=el("shop-menu-"+idx);if(m)m.classList.remove("open");
   }
 };
+function togglePw(){
+  var inp=document.getElementById("login-pw");
+  var eye=document.getElementById("pw-eye");
+  if(inp.type==="password"){inp.type="text";eye.innerText="🙈";}
+  else{inp.type="password";eye.innerText="👁️";}
+}
 App.init();
 </script>
 
