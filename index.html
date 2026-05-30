@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -98,6 +97,12 @@ padding:10px 6px; border:1px solid #ddd; border-radius:8px;
 font-size:13px; font-family:inherit; background:#fff;
 -webkit-appearance:none;
 }
+.row-menu {
+flex:0; width:100px; min-width:80px;
+padding:10px 8px; border:1px solid #ddd; border-radius:8px;
+font-size:13px; font-family:inherit; background:#fff;
+}
+.row-menu:focus { outline:none; border-color:#1e40af; }
 .row-name {
 flex:1; min-width:0;
 padding:10px 8px; border:1px solid #ddd; border-radius:8px;
@@ -248,6 +253,9 @@ input[type=file] { display:none; }
           <input type="text" id="rest-name-1" placeholder="식당 이름" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('rest',1)">▼</button>
           <div class="dropdown-menu" id="rest-drop-1"></div>
+          <input type="text" id="rest-menu-1" placeholder="메뉴" class="row-menu">
+          <button type="button" class="btn-list" onclick="FixedDrop.open('menu',1)">▼</button>
+          <div class="dropdown-menu" id="menu-drop-1"></div>
         </div>
         <div class="fixed-row" id="rest-row-2">
           <input type="date" id="rest-date-2" class="row-date">
@@ -255,6 +263,9 @@ input[type=file] { display:none; }
           <input type="text" id="rest-name-2" placeholder="식당 이름" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('rest',2)">▼</button>
           <div class="dropdown-menu" id="rest-drop-2"></div>
+          <input type="text" id="rest-menu-2" placeholder="메뉴" class="row-menu">
+          <button type="button" class="btn-list" onclick="FixedDrop.open('menu',2)">▼</button>
+          <div class="dropdown-menu" id="menu-drop-2"></div>
         </div>
       </div>
     </div>
@@ -648,7 +659,8 @@ var Daily = {
       var rn=document.getElementById("rest-name-"+ri);
       var rd=document.getElementById("rest-date-"+ri);
       var rt=document.getElementById("rest-time-"+ri);
-      if(rn&&rn.value.trim())rests.push({name:rn.value.trim(),date:rd?rd.value:"",time:rt?rt.value:""});
+      var rm=document.getElementById("rest-menu-"+ri);
+      if(rn&&rn.value.trim())rests.push({name:rn.value.trim(),date:rd?rd.value:"",time:rt?rt.value:"",menu:rm?rm.value.trim():""});
     }
     var shops3=[];
     for(var si=1;si<=3;si++){
@@ -762,9 +774,12 @@ var Report = {
    ============================== */
 var FixedDrop={
   open:function(type,idx){
-    var menu=document.getElementById(type+"-drop-"+idx);
+    var menuId=type==="menu"?"menu-drop-"+idx:type+"-drop-"+idx;
+    var menu=document.getElementById(menuId);
     if(!menu)return;
-    var items=type==="rest"?(Dropdown.restaurants||[]):(Shopping.companies||[]);
+    var items=type==="rest"?(Dropdown.restaurants||[]):
+              type==="menu"?(FixedDrop.menus||[]):
+              (Shopping.companies||[]);
     var rows=[];
     items.forEach(function(it){
       var d=document.createElement("div");
@@ -777,16 +792,30 @@ var FixedDrop={
     menu.innerHTML=rows.join("")+addBtn;
     // use event delegation for add
     menu.querySelector(".add-new").addEventListener("click",function(){
-      type==="rest"?Dropdown.addNew():Shopping.addNew();
+      if(type==="rest") Dropdown.addNew();
+      else if(type==="menu") FixedDrop.addMenu();
+      else Shopping.addNew();
     });
     document.querySelectorAll(".dropdown-menu").forEach(function(m){m.classList.remove("open");});
     menu.classList.add("open");
   },
   pick:function(type,idx,val){
-    var inp=document.getElementById(type+"-name-"+idx);
+    var inpId=type==="menu"?"rest-menu-"+idx:type+"-name-"+idx;
+    var inp=document.getElementById(inpId);
     if(inp)inp.value=val;
-    var menu=document.getElementById(type+"-drop-"+idx);
+    var menuId=type==="menu"?"menu-drop-"+idx:type+"-drop-"+idx;
+    var menu=document.getElementById(menuId);
     if(menu)menu.classList.remove("open");
+  },
+  menus:[
+    {name:"불고기"},{name:"비빔밥"},{name:"삼겹살"},{name:"갈비탕"},
+    {name:"된장찌개"},{name:"김치찌개"},{name:"냉면"},{name:"순두부찌개"},
+    {name:"잡채"},{name:"해물파전"},{name:"갈비구이"},{name:"보쌈"}
+  ],
+  addMenu:function(){
+    var nm=window.prompt("새 메뉴 이름:");
+    if(!nm)return;
+    FixedDrop.menus.push({name:nm.trim()});
   }
 };
 var RestDropdown={
