@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -436,7 +437,6 @@ var TourInfo = {
     var data=null, error=null;
     var res=await sb.from("tours")
       .select("id,tour_code,flight_code,arrival_time,captain_name,captain_contact,bus_capacity,pax,total_days,current_day,scenic_confirmed,everton_confirmed,status,scheduled_start_time,guide_name")
-      .eq("status","pending")
       .order("scheduled_start_time",{ascending:true})
       .limit(1).maybeSingle();
     data=res.data; error=res.error;
