@@ -82,8 +82,16 @@
 
 .fixed-row {
 
-display:flex; gap:6px; align-items:center; margin-bottom:8px;
-flex-wrap:nowrap; position:relative;
+display:grid;
+grid-template-columns: 155px 55px 30px 1fr auto 90px auto;
+gap:5px; align-items:center; margin-bottom:10px;
+position:relative;
+}
+.fixed-row-shop {
+display:grid;
+grid-template-columns: 155px 55px 30px 1fr auto;
+gap:5px; align-items:center; margin-bottom:10px;
+position:relative;
 }
 .row-date {
 flex:0; width:130px; min-width:100px;
@@ -111,6 +119,11 @@ font-size:13px; font-family:inherit; background:#fff; text-align:center;
 -webkit-appearance:none;
 }
 .row-pax:focus { outline:none; border-color:#1e40af; }
+.row-tc {
+width:30px; padding:10px 4px; border:1px solid #ddd; border-radius:8px;
+font-size:12px; font-family:inherit; background:#fff; text-align:center;
+}
+.row-tc:focus { outline:none; border-color:#1e40af; }
 .row-menu {
 flex:0; width:100px; min-width:80px;
 padding:10px 8px; border:1px solid #ddd; border-radius:8px;
@@ -268,21 +281,27 @@ input[type=file] { display:none; }
       <label>식당 방문 (최대 2개)</label>
       <div id="rest-rows">
         <div class="fixed-row" id="rest-row-1">
-          <input type="datetime-local" id="rest-dt-1" class="row-dt" placeholder="날짜/시간">
-          <input type="number" id="rest-pax-1" placeholder="인원" class="row-pax" min="1">
-          <input type="text" id="rest-name-1" placeholder="식당 이름" class="row-name">
+          <div style="position:relative;"><span style="position:absolute;top:-10px;left:4px;font-size:10px;color:#94a3b8;font-weight:600;">날짜·시간</span><input type="datetime-local" id="rest-dt-1" class="row-dt" style="padding-top:14px;"></div>
+          <input type="number" id="rest-pax-1" placeholder="손님" class="row-pax" min="1">
+          <input type="text" id="rest-tc-1" placeholder="TC" class="row-tc">
+          <div style="position:relative;">
+            <input type="text" id="rest-name-1" placeholder="식당 이름" class="row-name">
+            <div class="dropdown-menu" id="rest-drop-1"></div>
+          </div>
           <button type="button" class="btn-list" onclick="FixedDrop.open('rest',1)">▼</button>
-          <div class="dropdown-menu" id="rest-drop-1"></div>
           <input type="text" id="rest-menu-1" placeholder="메뉴" class="row-menu">
           <button type="button" class="btn-list" onclick="FixedDrop.open('menu',1)">▼</button>
           <div class="dropdown-menu" id="menu-drop-1"></div>
         </div>
         <div class="fixed-row" id="rest-row-2">
-          <input type="datetime-local" id="rest-dt-2" class="row-dt" placeholder="날짜/시간">
-          <input type="number" id="rest-pax-2" placeholder="인원" class="row-pax" min="1">
-          <input type="text" id="rest-name-2" placeholder="식당 이름" class="row-name">
+          <div style="position:relative;"><span style="position:absolute;top:-10px;left:4px;font-size:10px;color:#94a3b8;font-weight:600;">날짜·시간</span><input type="datetime-local" id="rest-dt-2" class="row-dt" style="padding-top:14px;"></div>
+          <input type="number" id="rest-pax-2" placeholder="손님" class="row-pax" min="1">
+          <input type="text" id="rest-tc-2" placeholder="TC" class="row-tc">
+          <div style="position:relative;">
+            <input type="text" id="rest-name-2" placeholder="식당 이름" class="row-name">
+            <div class="dropdown-menu" id="rest-drop-2"></div>
+          </div>
           <button type="button" class="btn-list" onclick="FixedDrop.open('rest',2)">▼</button>
-          <div class="dropdown-menu" id="rest-drop-2"></div>
           <input type="text" id="rest-menu-2" placeholder="메뉴" class="row-menu">
           <button type="button" class="btn-list" onclick="FixedDrop.open('menu',2)">▼</button>
           <div class="dropdown-menu" id="menu-drop-2"></div>
@@ -294,26 +313,35 @@ input[type=file] { display:none; }
     <div class="fld" style="margin-bottom:14px;">
       <label>쇼핑업체 방문 (최대 3개)</label>
       <div id="shop-rows">
-        <div class="fixed-row" id="shop-row-1">
-          <input type="datetime-local" id="shop-dt-1" class="row-dt" placeholder="날짜/시간">
-          <input type="number" id="shop-pax-1" placeholder="인원" class="row-pax" min="1">
-          <input type="text" id="shop-name-1" placeholder="쇼핑업체" class="row-name">
+        <div class="fixed-row-shop" id="shop-row-1">
+          <div style="position:relative;"><span style="position:absolute;top:-10px;left:4px;font-size:10px;color:#94a3b8;font-weight:600;">날짜·시간</span><input type="datetime-local" id="shop-dt-1" class="row-dt" style="padding-top:14px;"></div>
+          <input type="number" id="shop-pax-1" placeholder="손님" class="row-pax" min="1">
+          <input type="text" id="shop-tc-1" placeholder="TC" class="row-tc">
+          <div style="position:relative;">
+            <input type="text" id="shop-name-1" placeholder="쇼핑업체" class="row-name">
+            <div class="dropdown-menu" id="shop-drop-1"></div>
+          </div>
           <button type="button" class="btn-list" onclick="FixedDrop.open('shop',1)">▼</button>
-          <div class="dropdown-menu" id="shop-drop-1"></div>
         </div>
-        <div class="fixed-row" id="shop-row-2">
-          <input type="datetime-local" id="shop-dt-2" class="row-dt" placeholder="날짜/시간">
-          <input type="number" id="shop-pax-2" placeholder="인원" class="row-pax" min="1">
-          <input type="text" id="shop-name-2" placeholder="쇼핑업체" class="row-name">
+        <div class="fixed-row-shop" id="shop-row-2">
+          <div style="position:relative;"><span style="position:absolute;top:-10px;left:4px;font-size:10px;color:#94a3b8;font-weight:600;">날짜·시간</span><input type="datetime-local" id="shop-dt-2" class="row-dt" style="padding-top:14px;"></div>
+          <input type="number" id="shop-pax-2" placeholder="손님" class="row-pax" min="1">
+          <input type="text" id="shop-tc-2" placeholder="TC" class="row-tc">
+          <div style="position:relative;">
+            <input type="text" id="shop-name-2" placeholder="쇼핑업체" class="row-name">
+            <div class="dropdown-menu" id="shop-drop-2"></div>
+          </div>
           <button type="button" class="btn-list" onclick="FixedDrop.open('shop',2)">▼</button>
-          <div class="dropdown-menu" id="shop-drop-2"></div>
         </div>
-        <div class="fixed-row" id="shop-row-3">
-          <input type="datetime-local" id="shop-dt-3" class="row-dt" placeholder="날짜/시간">
-          <input type="number" id="shop-pax-3" placeholder="인원" class="row-pax" min="1">
-          <input type="text" id="shop-name-3" placeholder="쇼핑업체" class="row-name">
+        <div class="fixed-row-shop" id="shop-row-3">
+          <div style="position:relative;"><span style="position:absolute;top:-10px;left:4px;font-size:10px;color:#94a3b8;font-weight:600;">날짜·시간</span><input type="datetime-local" id="shop-dt-3" class="row-dt" style="padding-top:14px;"></div>
+          <input type="number" id="shop-pax-3" placeholder="손님" class="row-pax" min="1">
+          <input type="text" id="shop-tc-3" placeholder="TC" class="row-tc">
+          <div style="position:relative;">
+            <input type="text" id="shop-name-3" placeholder="쇼핑업체" class="row-name">
+            <div class="dropdown-menu" id="shop-drop-3"></div>
+          </div>
           <button type="button" class="btn-list" onclick="FixedDrop.open('shop',3)">▼</button>
-          <div class="dropdown-menu" id="shop-drop-3"></div>
         </div>
       </div>
     </div>
@@ -673,14 +701,16 @@ var Daily = {
       var rdt=document.getElementById("rest-dt-"+ri);
       var rm=document.getElementById("rest-menu-"+ri);
       var rp=document.getElementById("rest-pax-"+ri);
-      if(rn&&rn.value.trim())rests.push({name:rn.value.trim(),datetime:rdt?rdt.value:"",menu:rm?rm.value.trim():"",pax:rp?rp.value:""});
+      var rtc=document.getElementById("rest-tc-"+ri);
+      if(rn&&rn.value.trim())rests.push({name:rn.value.trim(),datetime:rdt?rdt.value:"",menu:rm?rm.value.trim():"",pax:rp?rp.value:"",tc:rtc?rtc.value:""});
     }
     var shops3=[];
     for(var si=1;si<=3;si++){
       var sn=document.getElementById("shop-name-"+si);
       var sdt=document.getElementById("shop-dt-"+si);
       var sp=document.getElementById("shop-pax-"+si);
-      if(sn&&sn.value.trim())shops3.push({name:sn.value.trim(),datetime:sdt?sdt.value:"",pax:sp?sp.value:""});
+      var stc=document.getElementById("shop-tc-"+si);
+      if(sn&&sn.value.trim())shops3.push({name:sn.value.trim(),datetime:sdt?sdt.value:"",pax:sp?sp.value:"",tc:stc?stc.value:""});
     }
     var payload={
       tour_id:State.tour.id,
