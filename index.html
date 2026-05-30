@@ -97,6 +97,20 @@ padding:10px 6px; border:1px solid #ddd; border-radius:8px;
 font-size:13px; font-family:inherit; background:#fff;
 -webkit-appearance:none;
 }
+.row-dt {
+flex:0; width:150px; min-width:130px;
+padding:10px 8px; border:1px solid #ddd; border-radius:8px;
+font-size:12px; font-family:inherit; background:#fff;
+-webkit-appearance:none;
+}
+.row-dt:focus { outline:none; border-color:#1e40af; }
+.row-pax {
+flex:0; width:65px; min-width:55px;
+padding:10px 8px; border:1px solid #ddd; border-radius:8px;
+font-size:13px; font-family:inherit; background:#fff; text-align:center;
+-webkit-appearance:none;
+}
+.row-pax:focus { outline:none; border-color:#1e40af; }
 .row-menu {
 flex:0; width:100px; min-width:80px;
 padding:10px 8px; border:1px solid #ddd; border-radius:8px;
@@ -254,8 +268,8 @@ input[type=file] { display:none; }
       <label>식당 방문 (최대 2개)</label>
       <div id="rest-rows">
         <div class="fixed-row" id="rest-row-1">
-          <input type="date" id="rest-date-1" class="row-date" placeholder="날짜">
-          <input type="time" id="rest-time-1" value="12:00" class="row-time">
+          <input type="datetime-local" id="rest-dt-1" class="row-dt" placeholder="날짜/시간">
+          <input type="number" id="rest-pax-1" placeholder="인원" class="row-pax" min="1">
           <input type="text" id="rest-name-1" placeholder="식당 이름" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('rest',1)">▼</button>
           <div class="dropdown-menu" id="rest-drop-1"></div>
@@ -264,8 +278,8 @@ input[type=file] { display:none; }
           <div class="dropdown-menu" id="menu-drop-1"></div>
         </div>
         <div class="fixed-row" id="rest-row-2">
-          <input type="date" id="rest-date-2" class="row-date" placeholder="날짜">
-          <input type="time" id="rest-time-2" value="18:00" class="row-time">
+          <input type="datetime-local" id="rest-dt-2" class="row-dt" placeholder="날짜/시간">
+          <input type="number" id="rest-pax-2" placeholder="인원" class="row-pax" min="1">
           <input type="text" id="rest-name-2" placeholder="식당 이름" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('rest',2)">▼</button>
           <div class="dropdown-menu" id="rest-drop-2"></div>
@@ -281,22 +295,22 @@ input[type=file] { display:none; }
       <label>쇼핑업체 방문 (최대 3개)</label>
       <div id="shop-rows">
         <div class="fixed-row" id="shop-row-1">
-          <input type="date" id="shop-date-1" class="row-date" placeholder="날짜">
-          <input type="time" id="shop-time-1" value="10:00" class="row-time">
+          <input type="datetime-local" id="shop-dt-1" class="row-dt" placeholder="날짜/시간">
+          <input type="number" id="shop-pax-1" placeholder="인원" class="row-pax" min="1">
           <input type="text" id="shop-name-1" placeholder="쇼핑업체" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('shop',1)">▼</button>
           <div class="dropdown-menu" id="shop-drop-1"></div>
         </div>
         <div class="fixed-row" id="shop-row-2">
-          <input type="date" id="shop-date-2" class="row-date" placeholder="날짜">
-          <input type="time" id="shop-time-2" value="13:00" class="row-time">
+          <input type="datetime-local" id="shop-dt-2" class="row-dt" placeholder="날짜/시간">
+          <input type="number" id="shop-pax-2" placeholder="인원" class="row-pax" min="1">
           <input type="text" id="shop-name-2" placeholder="쇼핑업체" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('shop',2)">▼</button>
           <div class="dropdown-menu" id="shop-drop-2"></div>
         </div>
         <div class="fixed-row" id="shop-row-3">
-          <input type="date" id="shop-date-3" class="row-date" placeholder="날짜">
-          <input type="time" id="shop-time-3" value="15:00" class="row-time">
+          <input type="datetime-local" id="shop-dt-3" class="row-dt" placeholder="날짜/시간">
+          <input type="number" id="shop-pax-3" placeholder="인원" class="row-pax" min="1">
           <input type="text" id="shop-name-3" placeholder="쇼핑업체" class="row-name">
           <button type="button" class="btn-list" onclick="FixedDrop.open('shop',3)">▼</button>
           <div class="dropdown-menu" id="shop-drop-3"></div>
@@ -656,17 +670,17 @@ var Daily = {
     var rests=[];
     for(var ri=1;ri<=2;ri++){
       var rn=document.getElementById("rest-name-"+ri);
-      var rd=document.getElementById("rest-date-"+ri);
-      var rt=document.getElementById("rest-time-"+ri);
+      var rdt=document.getElementById("rest-dt-"+ri);
       var rm=document.getElementById("rest-menu-"+ri);
-      if(rn&&rn.value.trim())rests.push({name:rn.value.trim(),date:rd?rd.value:"",time:rt?rt.value:"",menu:rm?rm.value.trim():""});
+      var rp=document.getElementById("rest-pax-"+ri);
+      if(rn&&rn.value.trim())rests.push({name:rn.value.trim(),datetime:rdt?rdt.value:"",menu:rm?rm.value.trim():"",pax:rp?rp.value:""});
     }
     var shops3=[];
     for(var si=1;si<=3;si++){
       var sn=document.getElementById("shop-name-"+si);
-      var sd=document.getElementById("shop-date-"+si);
-      var st=document.getElementById("shop-time-"+si);
-      if(sn&&sn.value.trim())shops3.push({name:sn.value.trim(),date:sd?sd.value:"",time:st?st.value:""});
+      var sdt=document.getElementById("shop-dt-"+si);
+      var sp=document.getElementById("shop-pax-"+si);
+      if(sn&&sn.value.trim())shops3.push({name:sn.value.trim(),datetime:sdt?sdt.value:"",pax:sp?sp.value:""});
     }
     var payload={
       tour_id:State.tour.id,
