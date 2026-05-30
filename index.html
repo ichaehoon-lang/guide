@@ -34,7 +34,7 @@
     .card-hd.slate { background:#f8fafc; border-bottom:1px solid #e2e8f0; color:#334155; }
     .card-bd { padding:14px 15px; }
 
-    /* 투어 정보 (자동 로드) */
+    /* 투어 정보 */
     .info-row { display:flex; align-items:center; padding:7px 0; border-bottom:1px solid #f1f5f9; gap:8px; }
     .info-row:last-child { border-bottom:none; }
     .info-lbl { font-size:11px; font-weight:600; color:var(--muted); min-width:85px; text-transform:uppercase; letter-spacing:.3px; }
@@ -79,11 +79,22 @@
     .dropdown-item:active { background:#eff6ff; }
     .dropdown-item.add-new { color:#1e40af; font-style:italic; }
 
-    /* 쇼핑업체 추가 */
+    /* 식당 방문 목록 (날짜+시간+이름) */
+    .rest-visit-list { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+    .rest-visit-item { display:flex; gap:8px; align-items:center; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:9px; padding:10px 12px; }
+    .rest-visit-item .rv-date { font-size:12px; color:#166534; font-weight:700; min-width:54px; }
+    .rest-visit-item .rv-time { font-size:13px; color:#1e40af; font-weight:700; min-width:48px; }
+    .rest-visit-item .rv-name { flex:1; font-size:14px; font-weight:700; color:var(--text); }
+    .rest-visit-item .rv-del { background:none; border:none; color:var(--red); font-size:18px; cursor:pointer; padding:0 4px; touch-action:manipulation; }
+    .btn-add-rest { width:100%; padding:11px; background:#f0fdf4; border:1px dashed #86efac; border-radius:9px; font-size:13px; font-weight:700; color:#166534; cursor:pointer; touch-action:manipulation; }
+    .btn-add-rest:active { background:#dcfce7; }
+
+    /* 쇼핑업체 목록 (날짜+시간+업체명) */
     .shop-list { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
     .shop-item { display:flex; gap:8px; align-items:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:9px; padding:10px 12px; }
-    .shop-item .sname { flex:1; font-size:14px; font-weight:700; color:var(--text); }
+    .shop-item .s-date { font-size:12px; color:#c2410c; font-weight:700; min-width:54px; }
     .shop-item .stime { font-size:13px; color:var(--blue); font-weight:700; min-width:48px; }
+    .shop-item .sname { flex:1; font-size:14px; font-weight:700; color:var(--text); }
     .shop-item .sdel { background:none; border:none; color:var(--red); font-size:18px; cursor:pointer; padding:0 4px; touch-action:manipulation; }
     .btn-add-shop { width:100%; padding:11px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:9px; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; touch-action:manipulation; }
     .btn-add-shop:active { background:#eef2ff; color:#1e40af; }
@@ -101,7 +112,7 @@
     .btn-save { width:100%; padding:12px; background:#0f766e; color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; touch-action:manipulation; margin-top:8px; }
     .btn-save:active { opacity:.85; }
 
-    /* 가이드 Fee (마지막날) */
+    /* 가이드 Fee */
     .fee-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:8px; margin:10px 0; }
     .fee-chip { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:9px 11px; }
     .fee-chip .fc-l { font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); font-weight:600; margin-bottom:2px; }
@@ -142,17 +153,19 @@
     .auth-err { color:var(--red); font-size:13px; text-align:center; margin-top:8px; }
     .btn-login { width:100%; padding:13px; background:var(--blue); color:#fff; border:none; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; }
 
-    /* 쇼핑 추가 팝업 */
+    /* 모달 (식당/쇼핑 추가) */
     .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:200; align-items:flex-end; }
     .modal-bg.open { display:flex; }
     .modal { background:#fff; border-radius:16px 16px 0 0; padding:20px; width:100%; max-width:540px; margin:0 auto; }
-    .modal h3 { font-size:15px; font-weight:700; margin-bottom:14px; }
-    .modal-list { max-height:280px; overflow-y:auto; }
+    .modal h3 { font-size:15px; font-weight:700; margin-bottom:10px; }
+    .modal-row { display:flex; gap:8px; margin-bottom:10px; align-items:center; }
+    .modal-row label { font-size:11px; font-weight:600; color:var(--muted); white-space:nowrap; }
+    .modal-row input { flex:1; padding:10px 11px; border:1px solid #ddd; border-radius:8px; font-size:14px; font-family:inherit; }
+    .modal-list { max-height:260px; overflow-y:auto; }
     .modal-item { padding:13px 12px; border-bottom:1px solid #f1f5f9; font-size:14px; font-weight:600; cursor:pointer; touch-action:manipulation; display:flex; align-items:center; justify-content:space-between; }
     .modal-item:active { background:#eff6ff; }
-    .modal-time { font-size:13px; color:var(--blue); }
+    .modal-item.add-new { color:#1e40af; }
     .modal-close { width:100%; padding:12px; background:#f1f5f9; border:none; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; margin-top:12px; }
-    .time-input { width:100%; padding:11px; border:1px solid #ddd; border-radius:8px; font-size:15px; margin:8px 0 4px; }
 
     @media(max-width:480px) { .fee-grid { grid-template-columns:repeat(2,1fr); } }
   </style>
@@ -184,7 +197,7 @@
 
   <div class="wrap">
 
-    <!-- ① 투어 정보 (자동 로드) -->
+    <!-- ① 투어 정보 (자동 로드 / 세션 캐시) -->
     <div class="card" id="tour-info-card">
       <div class="card-hd blue">✈️ 오늘 투어 정보 (자동 로드)</div>
       <div class="card-bd" id="tour-info-body">
@@ -208,23 +221,18 @@
       <div class="card-hd green">✏️ 오늘 현장 입력</div>
       <div class="card-bd">
 
-        <!-- 한식당 -->
-        <div class="fld" style="margin-bottom:14px;">
-          <label>한식당</label>
-          <div class="dropdown" id="rest-dropdown">
-            <div class="rest-wrap">
-              <input type="text" id="rest-input" placeholder="식당 이름 입력 또는 선택">
-              <button class="btn-list" onclick="Dropdown.toggle('rest')">▼ 리스트</button>
-            </div>
-            <div class="dropdown-menu" id="rest-menu"></div>
-          </div>
+        <!-- 한식당 방문 (날짜+시간+이름, 최대 2개) -->
+        <div class="fld" style="margin-bottom:4px;">
+          <label>한식당 방문 (최대 2개)</label>
+          <div class="rest-visit-list" id="rest-visit-list"></div>
+          <button class="btn-add-rest" id="btn-add-rest" onclick="RestVisit.openModal()">+ 한식당 추가</button>
         </div>
 
-        <!-- 쇼핑업체 -->
-        <div class="fld" style="margin-bottom:4px;">
-          <label>쇼핑업체 방문</label>
+        <!-- 쇼핑업체 방문 (날짜+시간+업체명, 최대 3개) -->
+        <div class="fld" style="margin-bottom:4px; margin-top:12px;">
+          <label>쇼핑업체 방문 (최대 3개)</label>
           <div class="shop-list" id="shop-list"></div>
-          <button class="btn-add-shop" onclick="Shopping.openModal()">+ 쇼핑업체 추가</button>
+          <button class="btn-add-shop" id="btn-add-shop" onclick="Shopping.openModal()">+ 쇼핑업체 추가</button>
         </div>
 
         <!-- 비고 -->
@@ -243,7 +251,6 @@
       <div class="card-hd red">🏆 마지막날 — 가이드 Fee & 최종 리포트</div>
       <div class="card-bd">
 
-        <!-- 가이드 Fee 입력 -->
         <div class="fld"><label>행사 일수 확인</label><input type="number" id="fee-days" value="1" min="1" readonly style="background:#f8fafc;"></div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <div class="fld" style="flex:1;min-width:120px;"><label>가이드 일당 (AUD/일)</label><input type="number" id="fee-daily" value="340" inputmode="decimal" oninput="Fee.calc()"></div>
@@ -258,7 +265,7 @@
           <div class="fee-chip"><div class="fc-l">샌딩비</div><div class="fc-v" id="fc-send">$0.00</div></div>
           <div class="fee-chip"><div class="fc-l">트랜스퍼</div><div class="fc-v" id="fc-trans">$0.00</div></div>
           <div class="fee-chip"><div class="fc-l">야경</div><div class="fc-v" id="fc-night">$0.00</div></div>
-          <div class="fee-chip"><div class="fc-l">기타</div><div class="fc-v" id="fc-etc">$0.00</div></div>
+          <div class="fee-chip"><div class="fc-l">기타</div><div class="fc-v" id="fc-etc-v">$0.00</div></div>
           <div class="fee-chip hi"><div class="fc-l">합계</div><div class="fc-v" id="fc-total">$0.00</div></div>
         </div>
 
@@ -295,11 +302,35 @@
   </div><!-- /wrap -->
 </div><!-- /app -->
 
+<!-- 한식당 추가 모달 -->
+<div class="modal-bg" id="rest-modal" onclick="RestVisit.closeModal(event)">
+  <div class="modal">
+    <h3>🍽️ 한식당 선택</h3>
+    <div class="modal-row">
+      <label>날짜</label>
+      <input type="date" id="rest-date" style="max-width:160px;">
+    </div>
+    <div class="modal-row">
+      <label>시간</label>
+      <input type="time" id="rest-time" value="12:00" style="max-width:130px;">
+    </div>
+    <div class="modal-list" id="rest-modal-list"></div>
+    <button class="modal-close" onclick="RestVisit.closeModal()">닫기</button>
+  </div>
+</div>
+
 <!-- 쇼핑업체 추가 모달 -->
 <div class="modal-bg" id="shop-modal" onclick="Shopping.closeModal(event)">
   <div class="modal">
     <h3>🛍️ 쇼핑업체 선택</h3>
-    <input type="time" class="time-input" id="shop-time" value="14:00">
+    <div class="modal-row">
+      <label>날짜</label>
+      <input type="date" id="shop-date" style="max-width:160px;">
+    </div>
+    <div class="modal-row">
+      <label>시간</label>
+      <input type="time" id="shop-time" value="14:00" style="max-width:130px;">
+    </div>
     <div class="modal-list" id="shop-modal-list"></div>
     <button class="modal-close" onclick="Shopping.closeModal()">닫기</button>
   </div>
@@ -316,9 +347,34 @@ function todayStr(){ return new Date().toISOString().slice(0,10); }
 function msg(id,t,ok){ var e=el(id);e.innerText=t;e.className="msg "+(ok?"ok":"err");setTimeout(function(){e.innerText="";},3000); }
 
 /* ==============================
+   캐시 유틸리티
+   ============================== */
+var Cache = {
+  // 24시간 캐시 (localStorage)
+  set24h: function(key, data) {
+    try {
+      localStorage.setItem(key, JSON.stringify({ data: data, ts: Date.now() }));
+    } catch(e) {}
+  },
+  get24h: function(key) {
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      if (Date.now() - obj.ts > 86400000) { localStorage.removeItem(key); return null; }
+      return obj.data;
+    } catch(e) { return null; }
+  },
+  // 세션 캐시 (메모리)
+  _session: {},
+  setSession: function(key, data) { Cache._session[key] = data; },
+  getSession: function(key) { return Cache._session[key] || null; }
+};
+
+/* ==============================
    STATE
    ============================== */
-var State = { tour:null, user:null, shops:[], photos:[], dailyId:null };
+var State = { tour:null, user:null, restVisits:[], shops:[], photos:[], dailyId:null };
 
 /* ==============================
    AUTH
@@ -333,12 +389,20 @@ var App = {
     State.user=data.user;
     App.show();
   },
-  async logout(){ await sb.auth.signOut(); location.reload(); },
+  async logout(){
+    Cache._session = {};  // 세션 캐시 초기화
+    await sb.auth.signOut();
+    location.reload();
+  },
   show(){
     el("auth").style.display="none";
     el("app").style.display="block";
     var d=new Date();
     el("hdr-date").innerText=d.getFullYear()+"년 "+(d.getMonth()+1)+"월 "+d.getDate()+"일 "+["일","월","화","수","목","금","토"][d.getDay()]+"요일";
+    // 오늘 날짜를 모달 기본값으로 설정
+    var today=todayStr();
+    el("rest-date").value=today;
+    el("shop-date").value=today;
     TourInfo.load();
     Dropdown.loadRestaurants();
     Shopping.loadCompanies();
@@ -350,11 +414,19 @@ var App = {
 };
 
 /* ==============================
-   TOUR INFO (자동 로드)
+   TOUR INFO (자동 로드 / 세션 캐시)
    ============================== */
 var TourInfo = {
   async load(){
-    var {data,error}=await sb.from("tours").select("*")
+    // 세션 캐시 확인 (로그아웃 전까지 유지)
+    var cached = Cache.getSession("tour");
+    if (cached) {
+      TourInfo.render(cached);
+      return;
+    }
+    // 필요한 컬럼만 조회 (SELECT * 대신)
+    var {data,error}=await sb.from("tours")
+      .select("id,tour_code,flight_code,arrival_time,captain_name,captain_contact,bus_capacity,pax,total_days,current_day,scenic_confirmed,everton_confirmed,status,scheduled_start_time")
       .eq("status","pending")
       .order("scheduled_start_time",{ascending:true})
       .limit(1).maybeSingle();
@@ -364,7 +436,12 @@ var TourInfo = {
       body.innerHTML="<div style='font-size:13px;color:var(--muted);'>오늘 등록된 투어가 없습니다.</div>";
       return;
     }
+    Cache.setSession("tour", data);
+    TourInfo.render(data);
+  },
+  render(data){
     State.tour=data;
+    var body=el("tour-info-body");
 
     // 마지막날 여부
     var isLast=(data.current_day||1)>=(data.total_days||1);
@@ -406,7 +483,7 @@ var Meeting = {
     var flight=t.flight_code||"항공편";
     var pax=t.pax||t.bus_capacity||"";
     var text=
-      "안녕하세요 "+( t.captain_name||"기사")+"님,\n"+
+      "안녕하세요 "+(t.captain_name||"기사")+"님,\n"+
       tourCode+" 투어입니다.\n"+
       "손님 미팅 완료했습니다.\n"+
       "15분 후 출구로 와주세요.\n"+
@@ -423,55 +500,106 @@ var Meeting = {
 };
 
 /* ==============================
-   한식당 드롭다운
+   한식당 드롭다운 (24시간 캐시)
    ============================== */
 var Dropdown = {
   restaurants:[],
   async loadRestaurants(){
-    var {data}=await sb.from("restaurants").select("*").order("name");
+    // 24시간 캐시 확인
+    var cached = Cache.get24h("restaurants");
+    if (cached) {
+      Dropdown.restaurants = cached;
+      return;
+    }
+    // 필요한 컬럼만 조회
+    var {data}=await sb.from("restaurants").select("id,name").order("name");
     Dropdown.restaurants=data||[];
-    var menu=el("rest-menu");
-    menu.innerHTML=(data||[]).map(function(r){
-      return "<div class='dropdown-item' onclick='Dropdown.select(\""+r.name+"\")'>"+r.name+"</div>";
-    }).join("")+"<div class='dropdown-item add-new' onclick='Dropdown.addNew()'>+ 새 식당 추가</div>";
+    Cache.set24h("restaurants", data||[]);
   },
-  toggle(type){
-    var menu=el(type+"-menu");
-    menu.classList.toggle("open");
+  buildModalList(){
+    var list=el("rest-modal-list");
+    list.innerHTML=Dropdown.restaurants.map(function(r){
+      return "<div class='modal-item' onclick='RestVisit.add(\""+r.name.replace(/"/g,"&quot;")+"\")'>"+r.name+"</div>";
+    }).join("")+"<div class='modal-item add-new' onclick='RestVisit.addNew()'>+ 새 식당 추가</div>";
   },
-  select(name){
-    el("rest-input").value=name;
-    el("rest-menu").classList.remove("open");
+  async addRestaurant(name){
+    await sb.from("restaurants").insert({name:name.trim()});
+    // 캐시 무효화 후 재로드
+    localStorage.removeItem("restaurants");
+    await Dropdown.loadRestaurants();
+  }
+};
+
+/* ==============================
+   한식당 방문 (날짜+시간+이름, 최대 2개)
+   ============================== */
+var RestVisit = {
+  openModal(){
+    if(State.restVisits.length>=2){msg("daily-msg","한식당은 최대 2개까지 추가할 수 있습니다.",false);return;}
+    Dropdown.buildModalList();
+    el("rest-modal").classList.add("open");
+  },
+  closeModal(e){
+    if(!e||e.target===el("rest-modal")||e.type==="click"){
+      el("rest-modal").classList.remove("open");
+    }
+  },
+  add(name){
+    var date=el("rest-date").value||todayStr();
+    var time=el("rest-time").value||"12:00";
+    State.restVisits.push({date:date,time:time,name:name});
+    RestVisit.render();
+    el("rest-modal").classList.remove("open");
+    // 2개 도달 시 버튼 숨김
+    el("btn-add-rest").style.display=State.restVisits.length>=2?"none":"block";
   },
   async addNew(){
     var name=window.prompt("새 식당 이름을 입력하세요:");
     if(!name)return;
-    await sb.from("restaurants").insert({name:name.trim()});
-    el("rest-input").value=name.trim();
-    el("rest-menu").classList.remove("open");
-    Dropdown.loadRestaurants();
+    await Dropdown.addRestaurant(name.trim());
+    RestVisit.add(name.trim());
+  },
+  remove(i){
+    State.restVisits.splice(i,1);
+    RestVisit.render();
+    el("btn-add-rest").style.display=State.restVisits.length>=2?"none":"block";
+  },
+  render(){
+    var html=State.restVisits.map(function(r,i){
+      return "<div class='rest-visit-item'>"+
+        "<span class='rv-date'>"+r.date+"</span>"+
+        "<span class='rv-time'>"+r.time+"</span>"+
+        "<span class='rv-name'>"+r.name+"</span>"+
+        "<button class='rv-del' onclick='RestVisit.remove("+i+")'>✕</button>"+
+        "</div>";
+    }).join("");
+    el("rest-visit-list").innerHTML=html;
   }
 };
 
-// 외부 클릭 시 드롭다운 닫기
-document.addEventListener("click",function(e){
-  if(!e.target.closest("#rest-dropdown")) el("rest-menu").classList.remove("open");
-});
-
 /* ==============================
-   쇼핑업체 모달
+   쇼핑업체 모달 (날짜+시간+업체명, 최대 3개 / 24시간 캐시)
    ============================== */
 var Shopping = {
   companies:[],
   async loadCompanies(){
-    var {data}=await sb.from("shopping_companies").select("*").order("name");
+    // 24시간 캐시 확인
+    var cached = Cache.get24h("shopping_companies");
+    if (cached) {
+      Shopping.companies = cached;
+      return;
+    }
+    // 필요한 컬럼만 조회
+    var {data}=await sb.from("shopping_companies").select("id,name").order("name");
     Shopping.companies=data||[];
+    Cache.set24h("shopping_companies", data||[]);
   },
   openModal(){
+    if(State.shops.length>=3){msg("daily-msg","쇼핑업체는 최대 3개까지 추가할 수 있습니다.",false);return;}
     var list=el("shop-modal-list");
     list.innerHTML=Shopping.companies.map(function(c){
-      return "<div class='modal-item' onclick='Shopping.add(\""+c.name+"\")'><span>"+c.name+"</span><span class='modal-time'></span></div>";
-    }).join("")+"<div class='modal-item add-new' onclick='Shopping.addNew()' style='color:#1e40af;'>+ 새 업체 추가</div>";
+      return "<div class='modal-item' onclick='Shopping.add(\""+c.name.replace(/"/g,"&quot;")+"\")'>"+c.name+"</div>";
+    }).join("")+"<div class='modal-item add-new' onclick='Shopping.addNew()'>+ 새 업체 추가</div>";
     el("shop-modal").classList.add("open");
   },
   closeModal(e){
@@ -480,25 +608,36 @@ var Shopping = {
     }
   },
   add(name){
+    var date=el("shop-date").value||todayStr();
     var time=el("shop-time").value||"14:00";
-    State.shops.push({name:name,time:time});
+    State.shops.push({date:date,time:time,name:name});
     Shopping.render();
     el("shop-modal").classList.remove("open");
+    // 3개 도달 시 버튼 숨김
+    el("btn-add-shop").style.display=State.shops.length>=3?"none":"block";
   },
   async addNew(){
     var name=window.prompt("새 쇼핑업체 이름:");
     if(!name)return;
     await sb.from("shopping_companies").insert({name:name.trim()});
+    // 캐시 무효화 후 재로드
+    localStorage.removeItem("shopping_companies");
     await Shopping.loadCompanies();
     Shopping.add(name.trim());
   },
   remove(i){
     State.shops.splice(i,1);
     Shopping.render();
+    el("btn-add-shop").style.display=State.shops.length>=3?"none":"block";
   },
   render(){
     var html=State.shops.map(function(s,i){
-      return "<div class='shop-item'><span class='sname'>"+s.name+"</span><span class='stime'>"+s.time+"</span><button class='sdel' onclick='Shopping.remove("+i+")'>✕</button></div>";
+      return "<div class='shop-item'>"+
+        "<span class='s-date'>"+s.date+"</span>"+
+        "<span class='stime'>"+s.time+"</span>"+
+        "<span class='sname'>"+s.name+"</span>"+
+        "<button class='sdel' onclick='Shopping.remove("+i+")'>✕</button>"+
+        "</div>";
     }).join("");
     el("shop-list").innerHTML=html;
   }
@@ -510,18 +649,25 @@ var Shopping = {
 var Daily = {
   async save(){
     if(!State.tour){msg("daily-msg","투어 정보가 없습니다.",false);return;}
-    var rest=el("rest-input").value.trim();
     var notes=el("daily-notes").value.trim();
     var {data:{user}}=await sb.auth.getUser();
+
+    // 식당: 첫 번째 항목의 이름을 restaurant_name으로 저장 (하위 호환)
+    var restName=State.restVisits.length>0?State.restVisits[0].name:null;
 
     var payload={
       tour_id:State.tour.id,
       guide_id:user.id,
       day_number:State.tour.current_day||1,
-      restaurant_name:rest||null,
+      restaurant_name:restName,
       shopping_visits:JSON.stringify(State.shops),
       notes:notes||null
     };
+
+    // restaurant_visits 컬럼이 있으면 함께 저장 (없어도 오류 없음)
+    if(State.restVisits.length>0){
+      payload.restaurant_visits=JSON.stringify(State.restVisits);
+    }
 
     var {error}=await sb.from("daily_records").insert(payload);
     if(error){msg("daily-msg","저장 실패: "+error.message,false);return;}
@@ -538,9 +684,12 @@ var Fee = {
     var rd=+(el("fee-daily").value)||0, rs=+(el("fee-send").value)||0;
     var rt=+(el("fee-trans").value)||0, rn=+(el("fee-night").value)||0, re=+(el("fee-etc").value)||0;
     var cD=rd*days, total=cD+rs+rt+rn+re;
-    el("fc-daily").innerText=ff(cD);el("fc-send").innerText=ff(rs);
-    el("fc-trans").innerText=ff(rt);el("fc-night").innerText=ff(rn);
-    el("fc-etc").innerText=ff(re);el("fc-total").innerText=ff(total);
+    el("fc-daily").innerText=ff(cD);
+    el("fc-send").innerText=ff(rs);
+    el("fc-trans").innerText=ff(rt);
+    el("fc-night").innerText=ff(rn);
+    el("fc-etc-v").innerText=ff(re);
+    el("fc-total").innerText=ff(total);
     el("fee-final").innerText=ff(total);
   }
 };
@@ -577,13 +726,16 @@ var Report = {
     if(!t){msg("report-msg","투어 정보가 없습니다.",false);return;}
     btn.disabled=true;btn.innerText="제출 중...";
 
-    // 이메일 작성
     var days=+(el("fee-days").value)||1;
     var rd=+(el("fee-daily").value)||0,rs=+(el("fee-send").value)||0;
     var rt=+(el("fee-trans").value)||0,rn=+(el("fee-night").value)||0,re=+(el("fee-etc").value)||0;
     var total=rd*days+rs+rt+rn+re;
     var d=new Date(), ds=d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate();
-    var shops=State.shops.map(function(s){return "  "+s.name+" ("+s.time+")";}).join("\n");
+
+    // 식당 목록 (날짜+시간+이름)
+    var rests=State.restVisits.map(function(r){return "  "+r.date+" "+r.time+" "+r.name;}).join("\n");
+    // 쇼핑 목록 (날짜+시간+업체명)
+    var shops=State.shops.map(function(s){return "  "+s.date+" "+s.time+" "+s.name;}).join("\n");
 
     var subj="[TourFlow 가이드 리포트] "+(t.tour_code||"투어")+" — "+ds;
     var body=[
@@ -592,7 +744,8 @@ var Report = {
       "항공편   : "+(t.flight_code||"—"),
       "행사일수 : "+days+"일",
       "손님 수  : "+(t.pax||"—")+"명",
-      "한식당   : "+(el("rest-input").value||"—"),
+      "",
+      "[한식당 방문]",rests||"  없음",
       "",
       "[쇼핑업체 방문]",shops||"  없음",
       "",
